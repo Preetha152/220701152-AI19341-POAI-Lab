@@ -1,0 +1,29 @@
+% Facts
+parent(john, mary).
+parent(john, mike).
+parent(mary, alice).
+parent(mary, bob).
+parent(mike, charlie).
+parent(susan, mary).
+parent(susan, mike).
+parent(david, john).
+parent(emily, john).
+parent(anna, bob).
+parent(lucas, charlie).
+
+% Rules
+child(X, Y) :- parent(Y, X).
+sibling(X, Y) :- parent(Z, X), parent(Z, Y), X \= Y.
+grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+aunt(X, Y) :- sibling(X, Z), parent(Z, Y).
+uncle(X, Y) :- sibling(X, Z), parent(Z, Y).
+cousin(X, Y) :- parent(Z, X), parent(W, Y), sibling(Z, W).
+
+% Queries
+% Example Queries:
+% ?- child(alice, mary).
+% ?- sibling(alice, bob).
+% ?- grandparent(david, alice).
+% ?- aunt(susan, charlie).
+% ?- uncle(mike, bob).
+% ?- cousin(alice, charlie).
